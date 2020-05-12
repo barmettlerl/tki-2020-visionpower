@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import {Button, Form, Alert} from 'react-bootstrap';
 import axios from 'axios';
 
+import {setStatistic} from '../utils/localStorage'
+
 import "./Home.css"
 
 const Home = () => {
@@ -24,7 +26,7 @@ const Home = () => {
           };
           axios.post("/api/upload",formData,config)
               .then((response) => {
-                  alert("The file is successfully uploaded");
+                  setStatistic(response.data)
                   setError(false)
                   setSuccessfull(true)
               }).catch((error) => {
@@ -34,8 +36,10 @@ const Home = () => {
   }
   return (
     <div className="home-container">
-    {error && <Alert variant="danger">Wählen Sie ein Bild aus</Alert>}
-    {successfull && <Alert variant="success">Bild wurde erfolgreich hochgeladen</Alert>}
+    {error && 
+    <Alert variant="danger">Wählen Sie ein Bild aus    
+    </Alert>}
+    {successfull && <Alert variant="success">Bild wurde erfolgreich hochgeladen. Gehen Sie zum <a href="/results">Resultat</a></Alert>}
       <Form onSubmit={onFormSubmit}>
         <Form.Group>
         <Form.Label>Bild hinzufügen</Form.Label>
