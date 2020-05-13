@@ -4,12 +4,10 @@ const path = require("path");
 const multer = require("multer");
 const vision = require('@google-cloud/vision');
 
-
 const client = new vision.ImageAnnotatorClient();
 
 const app = express();
 const port = process.env.PORT || 5000;
-
 
 // UPLOAD REQUEST
 const storage = multer.diskStorage({

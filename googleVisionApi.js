@@ -1,8 +1,8 @@
-import urljoin from 'url-join';
-
-export class GoogleVisionApi {
+const urljoin = require('url-join');
+const config = require('./privateConfig');
+class GoogleVisionApi {
     static imageRecognitionURL = "https://vision.googleapis.com/v1/images:annotate";
-    static apiKey = "?key=AIzaSyB5WVcfCzsxhCRfh34jTiubDyEOnP5pXYc";
+    static apiKey = "?key=" + config.googleVisionApiKey;
     static requestURL = urljoin(GoogleVisionApi.imageRecognitionURL, GoogleVisionApi.apiKey);
     static async postImage(base64StringOfImage, type = "LABEL_DETECTION", maxResults = 5) {
         const requestBody = {
@@ -30,3 +30,5 @@ export class GoogleVisionApi {
         return response.json();
     }
 }
+
+module.exports = GoogleVisionApi;
